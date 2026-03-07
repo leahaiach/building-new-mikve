@@ -1,65 +1,229 @@
-import Image from "next/image";
+// app/page.tsx
+'use client';
+import { useEffect, useState } from 'react';
 
-export default function Home() {
+type StatsResponse = { count: number };
+type PostResponse = { ok?: boolean; count?: number; error?: string };
+
+export default function HomePage() {
+  const [count, setCount] = useState<number | null>(null);
+  const [name, setName] = useState('');
+  const [neighborhood, setNeighborhood] = useState('גבעת מרדכי');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [wantsToVolunteer, setWantsToVolunteer] = useState(false);
+  const [note, setNote] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [successMsg, setSuccessMsg] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch('/api/signatures')
+      .then((res) => res.json())
+      .then((data: StatsResponse) => setCount(data.count))
+      .catch(() => setCount(null));
+  }, []);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    setErrorMsg(null);
+    setSuccessMsg(null);
+
+    try {
+      const res = await fetch('/api/signatures', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          neighborhood,
+          phone,
+          email,
+          wantsToVolunteer,
+          note,
+        }),
+      });
+
+      const data: PostResponse = await res.json();
+
+      if (!res.ok) {
+        setErrorMsg(data.error || 'אירעה שגיאה בעת שליחת הטופס.');
+      } else {
+        setSuccessMsg('תודה! החתימה שלך התקבלה.');
+        setCount(data.count ?? count);
+        setName('');
+        setNeighborhood('גבעת מרדכי');
+        setPhone('');
+        setEmail('');
+        setWantsToVolunteer(false);
+        setNote('');
+      }
+    } catch {
+      setErrorMsg('לא ניתן להתחבר לשרת. נסו שוב מאוחר יותר.');
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      <header className="hero">
+        <div className="hero-overlay" />
+        <div className="hero-inner">
+          <span className="hero-tag">עצומה קהילתית בגבעת מרדכי</span>
+          <h1>בונים יחד מקווה חדש, מכובד ונגיש לכולם</h1>
+          <p className="hero-subtitle">
+            החתימה שלך מצטרפת לקולות התושבים המבקשים מרחב טהרה נעים, מכובד ובטוח
+            למשפחות השכונה כולה.
           </p>
+          <div className="hero-stats-row">
+            <div className="hero-count-card">
+              <span className="hero-count-number">
+                {count === null ? '—' : count}
+              </span>
+              <span className="hero-count-label">חתימות עד עכשיו</span>
+            </div>
+            <a href="#signature-form" className="hero-cta">
+              מצטרפים לעצומה
+            </a>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+      </header>
+
+      <main>
+        <section className="section section-grid">
+          <div>
+            <h2>למה אנחנו צריכים מקווה חדש?</h2>
+            <p>
+              תושבים רבים בגבעת מרדכי מרגישים שהמצב הקיים של המקווה איננו עונה עוד על
+              הצרכים – מבחינת תחזוקה, נגישות, פרטיות ויכולת לקלוט את כל הפונות.
+            </p>
+            <p>
+              יוזמה זו נועדה לרכז חתימות של תושבי ותושבות השכונה כדי להציג תמונה ברורה
+              לרשויות ולגופים הרלוונטיים, ולהראות שיש רצון אמיתי ומכובד לשדרוג המרחב
+              הרוחני של הקהילה.
+            </p>
+          </div>
+          <div className="section-highlight-box">
+            <h3>מה חשוב לנו?</h3>
+            <ul className="bullet-list">
+              <li>מרחב מכבד, נעים ושמור על פרטיות</li>
+              <li>נגישות מלאה לנשים עם מוגבלות ועגלות</li>
+              <li>תשתיות חדשות ומתוחזקות לאורך זמן</li>
+              <li>תחושת שייכות וגאווה לתושבי השכונה</li>
+            </ul>
+          </div>
+        </section>
+
+        <section className="section section-accent">
+          <h2>כמות החתימות עד עכשיו</h2>
+          <p className="counter">
+            נכון לעכשיו חתמו{' '}
+            <strong>
+              {count === null ? '—' : `${count} תושבות ותושבים מגבעת מרדכי`}
+            </strong>
+            .
+          </p>
+          <p className="muted">
+            כל חתימה נוספת מחזקת את קול הקהילה מול מקבלי ההחלטות ומקדמת אותנו צעד נוסף
+            לעבר מקווה חדש, מכובד וראוי לשם שמים.
+          </p>
+        </section>
+
+        <section id="signature-form" className="section section-form">
+          <h2>חותמים על העצומה</h2>
+          <p className="muted">
+            אנא מלאו את הפרטים בטופס. שם וטלפון משמשים לאימות ולקשר במידת הצורך בלבד.
+            ניתן לסמן אם תרצו להצטרף גם למעגל המתנדבים לקידום הפרויקט.
+          </p>
+
+          <form onSubmit={handleSubmit} className="form-card">
+            <div className="form-grid">
+              <label>
+                שם פרטי ומשפחה (חובה)
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                  placeholder="לדוגמה: יעל כהן"
+                />
+              </label>
+
+              <label>
+                שכונה
+                <input
+                  type="text"
+                  value={neighborhood}
+                  onChange={(e) => setNeighborhood(e.target.value)}
+                  placeholder="גבעת מרדכי או שכונה אחרת"
+                />
+              </label>
+            </div>
+
+            <div className="form-grid">
+              <label>
+                טלפון (חובה)
+                <input
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  required
+                  placeholder="מספר טלפון לניהול קשר במידת הצורך"
+                />
+              </label>
+
+              <label>
+                אימייל (לא חובה)
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="למשל: name@example.com"
+                />
+              </label>
+            </div>
+
+            <label className="checkbox-row">
+              <input
+                type="checkbox"
+                checked={wantsToVolunteer}
+                onChange={(e) => setWantsToVolunteer(e.target.checked)}
+              />
+              אני מעוניין/ת להצטרף למעגל המתנדבים לקידום הפרויקט
+            </label>
+
+            <label>
+              הערה (לא חובה)
+              <textarea
+                value={note}
+                onChange={(e) => setNote(e.target.value)}
+                rows={3}
+                placeholder="אפשר לכתוב הערה, מחשבה או הצעה לשיפור"
+              />
+            </label>
+
+            {errorMsg && <div className="alert error">{errorMsg}</div>}
+            {successMsg && <div className="alert success">{successMsg}</div>}
+
+            <button type="submit" disabled={loading} className="primary-button">
+              {loading ? 'שולח…' : 'שליחת החתימה והצטרפות לעצומה'}
+            </button>
+          </form>
+        </section>
+
+        <section className="section section-footer">
+          <h2>שאלות, רעיונות והצעות</h2>
+          <p>
+            אם יש לכן ולכם שאלות, התלבטויות או רעיונות לקידום המהלך בצורה מכובדת ומאחדת,
+            נשמח לשמוע:
+          </p>
+          <p>
+            אפשר לפנות במייל לוועדת היוזמה:{' '}
+            <a href="mailto:your-email@example.com">your-email@example.com</a>
+          </p>
+        </section>
       </main>
-    </div>
+    </>
   );
 }
