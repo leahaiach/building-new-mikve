@@ -5,7 +5,7 @@ import { addSignature, getSignatureCount } from '@/lib/db';
 export const runtime = 'nodejs';
 
 export async function GET() {
-  const count = getSignatureCount();
+  const count = await getSignatureCount();
   return NextResponse.json({ count });
 }
 
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const count = addSignature({
+    const count = await addSignature({
       name,
       neighborhood,
       phone,

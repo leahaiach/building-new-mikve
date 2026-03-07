@@ -71,9 +71,9 @@ export default function HomePage() {
         <div className="hero-overlay" />
         <div className="hero-inner">
           <span className="hero-tag">עצומה קהילתית בגבעת מרדכי</span>
-          <h1>בונים יחד מקווה חדש, מכובד ונגיש לכולם</h1>
+          <h1>בונות יחד מקווה חדש, מכובד לכולן</h1>
           <p className="hero-subtitle">
-            החתימה שלך מצטרפת לקולות התושבים המבקשים מרחב טהרה נעים, מכובד ובטוח
+            החתימה שלך מצטרפת לקולות התושבות המבקשות מרחב טהרה נעים, מכובד ובטוח
             למשפחות השכונה כולה.
           </p>
           <div className="hero-stats-row">
