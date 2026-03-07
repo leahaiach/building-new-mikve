@@ -42,16 +42,22 @@ export async function addSignature(params: {
   note: string | null;
 }): Promise<number> {
   await init();
-  await sql`
-    INSERT INTO signatures (name, neighborhood, phone, email, wants_to_volunteer, note)
-    VALUES (
-      ${params.name},
-      ${params.neighborhood || null},
-      ${params.phone},
-      ${params.email},
-      ${params.wantsToVolunteer},
-      ${params.note}
-    )
+  const { rows: existing } = await sql<{ id: number }>`
+    SELECT id FROM signatures WHERE name = ${params.name} LIMIT 1
   `;
+
+  if (existing.length === 0) {
+    await sql`
+      INSERT INTO signatures (name, neighborhood, phone, email, wants_to_volunteer, note)
+      VALUES (
+        ${params.name},
+        ${params.neighborhood || null},
+        ${params.phone},
+        ${params.email},
+        ${params.wantsToVolunteer},
+        ${params.note}
+      )
+    `;
+  }
   return getSignatureCount();
 }
