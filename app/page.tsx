@@ -18,7 +18,7 @@ export default function HomePage() {
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('/api/signatures')
+    fetch('/api/signature')
       .then((res) => res.json())
       .then((data: StatsResponse) => setCount(data.count))
       .catch(() => setCount(null));
@@ -31,7 +31,7 @@ export default function HomePage() {
     setSuccessMsg(null);
 
     try {
-      const res = await fetch('/api/signatures', {
+      const res = await fetch('/api/signature', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
