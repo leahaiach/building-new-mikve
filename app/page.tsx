@@ -71,10 +71,10 @@ export default function HomePage() {
         <div className="hero-overlay" />
         <div className="hero-inner">
           <span className="hero-tag">עצומה קהילתית בגבעת מרדכי</span>
-          <h1>בונות יחד מקווה חדש, מכובד לכולן</h1>
+          <h1>בונות יחד מקווה חדש לכולן</h1>
           <p className="hero-subtitle">
-            החתימה שלך מצטרפת לקולות התושבות המבקשות מרחב טהרה נעים, מכובד ובטוח
-            למשפחות השכונה כולה.
+        החתימה שלך מצטרפת לקולות התושבות המבקשות מקווה טהרה מכובד 
+            לנשות השכונה .
           </p>
           <div className="hero-stats-row">
             <div className="hero-count-card">
@@ -94,22 +94,17 @@ export default function HomePage() {
         <section className="section section-grid">
           <div>
             <h2>למה אנחנו צריכים מקווה חדש?</h2>
+            
             <p>
-              תושבים רבים בגבעת מרדכי מרגישים שהמצב הקיים של המקווה איננו עונה עוד על
-              הצרכים – מבחינת תחזוקה, נגישות, פרטיות ויכולת לקלוט את כל הפונות.
-            </p>
-            <p>
-              יוזמה זו נועדה לרכז חתימות של תושבי ותושבות השכונה כדי להציג תמונה ברורה
-              לרשויות ולגופים הרלוונטיים, ולהראות שיש רצון אמיתי ומכובד לשדרוג המרחב
-              הרוחני של הקהילה.
+              יוזמה זו נועדה לרכז חתימות של תושבות השכונה כדי להציג תמונה ברורה
+              לרשויות ולגופים הרלוונטיים, ולהראות שיש רצון אמיתי ומכובד לבניית מקווה חדש
             </p>
           </div>
           <div className="section-highlight-box">
             <h3>מה חשוב לנו?</h3>
             <ul className="bullet-list">
-              <li>מרחב מכבד, נעים ושמור על פרטיות</li>
-              <li>נגישות מלאה לנשים עם מוגבלות ועגלות</li>
-              <li>תשתיות חדשות ומתוחזקות לאורך זמן</li>
+              <li> להתאחד יחד ובשלום למטרה אחת : בניית מקווה חדש</li>
+              <li>     להראות לגורמים הרלוונטיים בעירייה כי יש רצון אמיתי לבניית מקווה חדש</li>
               <li>תחושת שייכות וגאווה לתושבי השכונה</li>
             </ul>
           </div>
@@ -120,7 +115,7 @@ export default function HomePage() {
           <p className="counter">
             נכון לעכשיו חתמו{' '}
             <strong>
-              {count === null ? '—' : `${count} תושבות ותושבים מגבעת מרדכי`}
+              {count === null ? '—' : `${count} תושבות מגבעת מרדכי`}
             </strong>
             .
           </p>
@@ -134,7 +129,7 @@ export default function HomePage() {
           <h2>חותמים על העצומה</h2>
           <p className="muted">
             אנא מלאו את הפרטים בטופס. שם וטלפון משמשים לאימות ולקשר במידת הצורך בלבד.
-            ניתן לסמן אם תרצו להצטרף גם למעגל המתנדבים לקידום הפרויקט.
+            ניתן לסמן אם תרצו להצטרף גם למעגל המתנדבות לקידום הפרויקט.
           </p>
 
           <form onSubmit={handleSubmit} className="form-card">
@@ -190,7 +185,7 @@ export default function HomePage() {
                 checked={wantsToVolunteer}
                 onChange={(e) => setWantsToVolunteer(e.target.checked)}
               />
-              אני מעוניין/ת להצטרף למעגל המתנדבים לקידום הפרויקט
+              אני מעוניינת להצטרף למעגל המתנדבים לקידום הפרויקט
             </label>
 
             <label>
@@ -215,12 +210,12 @@ export default function HomePage() {
         <section className="section section-footer">
           <h2>שאלות, רעיונות והצעות</h2>
           <p>
-            אם יש לכן ולכם שאלות, התלבטויות או רעיונות לקידום המהלך בצורה מכובדת ומאחדת,
+            אם יש לכן שאלות או רעיונות לקידום המהלך בצורה מכובדת ומאחדת,
             נשמח לשמוע:
           </p>
           <p>
-            אפשר לפנות במייל לוועדת היוזמה:{' '}
-            <a href="mailto:your-email@example.com">your-email@example.com</a>
+          אפשר לפנות במייל  :{' '}
+            <a href="mailto:aiach.leah@gmail.com">aiach.leah@gmail.com</a>
           </p>
         </section>
       </main>
