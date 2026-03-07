@@ -20,11 +20,10 @@ main {
 /* Hero */
 .hero {
   position: relative;
-  overflow: hidden;
   padding: 56px 16px 72px;
   color: #fff;
   text-align: center;
-  background: url("https://upload.wikimedia.org/wikipedia/commons/a/ab/Sulam_Yaakov.jpg")
+  background: url("https://upload.wikimedia.org/wikipedia/commons/b/b8/Givat_Mordechai_%2837380463%29.jpg")
   center/cover no-repeat;
 }
 
