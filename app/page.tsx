@@ -93,7 +93,7 @@ export default function HomePage() {
       <main>
         <section className="section section-grid">
           <div>
-            <h2>למה אנחנו צריכים מקווה חדש?</h2>
+            <h2>למה אנחנו צריכות מקווה חדש?</h2>
             
             <p>
               יוזמה זו נועדה לרכז חתימות של תושבות השכונה כדי להציג תמונה ברורה
@@ -114,9 +114,9 @@ export default function HomePage() {
           <h2>כמות החתימות עד עכשיו</h2>
           <p className="counter">
             נכון לעכשיו חתמו{' '}
-            <strong>
+            
               {count === null ? '—' : `${count} תושבות מגבעת מרדכי`}
-            </strong>
+            
             .
           </p>
           <p className="muted">
