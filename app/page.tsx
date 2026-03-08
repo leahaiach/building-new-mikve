@@ -68,7 +68,6 @@ export default function HomePage() {
 
   return (
     <>
-    <title>בונות יחד מקווה חדש לכולן</title>
 
       <header className="hero">
         <div className="hero-overlay" />
