@@ -1,6 +1,7 @@
 // app/page.tsx
 'use client';
 import { useEffect, useState } from 'react';
+//import { metadata } from './layout';
 
 type StatsResponse = { count: number };
 type PostResponse = { ok?: boolean; count?: number; error?: string };
@@ -16,7 +17,7 @@ export default function HomePage() {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
-
+   
   useEffect(() => {
     fetch('/api/signature')
       .then((res) => res.json())
@@ -67,6 +68,8 @@ export default function HomePage() {
 
   return (
     <>
+    <title>בונות יחד מקווה חדש לכולן</title>
+
       <header className="hero">
         <div className="hero-overlay" />
         <div className="hero-inner">
