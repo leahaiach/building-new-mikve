@@ -85,7 +85,7 @@ export default function HomePage() {
               <span className="hero-count-label">חתימות עד עכשיו</span>
             </div>
             <a href="#signature-form" className="hero-cta">
-              מצטרפים לעצומה
+          מצטרפות 
             </a>
           </div>
         </div>
@@ -126,7 +126,7 @@ export default function HomePage() {
         </section>
 
         <section id="signature-form" className="section section-form">
-          <h2>חותמים על העצומה</h2>
+          <h2>חותמות  </h2>
           <p className="muted">
             אנא מלאו את הפרטים בטופס. שם וטלפון משמשים לאימות ולקשר במידת הצורך בלבד.
             ניתן לסמן אם תרצו להצטרף גם למעגל המתנדבות לקידום הפרויקט.
@@ -202,7 +202,7 @@ export default function HomePage() {
             {successMsg && <div className="alert success">{successMsg}</div>}
 
             <button type="submit" disabled={loading} className="primary-button">
-              {loading ? 'שולח…' : 'שליחת החתימה והצטרפות לעצומה'}
+              {loading ? 'שולח…' : 'שליחת החתימה והצטרפות '}
             </button>
           </form>
         </section>
@@ -215,7 +215,7 @@ export default function HomePage() {
           </p>
           <p>
           אפשר לפנות במייל  :{' '}
-            <a href="mailto:aiach.leah@gmail.com">aiach.leah@gmail.com</a>
+            <a href="mailto:aiach.leah@gmail.com">  mikvegm@gmail.com</a>
           </p>
         </section>
       </main>
