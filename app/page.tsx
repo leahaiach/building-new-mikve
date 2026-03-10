@@ -72,7 +72,7 @@ export default function HomePage() {
       <header className="hero">
         <div className="hero-overlay" />
         <div className="hero-inner">
-          <h1>בונות יחד מקווה חדש לכולן</h1>
+          <h1> בגבעת מרדכי בונות יחד מקווה חדש לכולן</h1>
           <p className="hero-subtitle">
         החתימה שלך מצטרפת לקולות התושבות המבקשות מקווה טהרה מכובד 
             לנשות השכונה .
@@ -92,6 +92,20 @@ export default function HomePage() {
       </header>
 
       <main>
+  {/* Content */}
+<div style={{
+  backgroundImage: "url('/mikve.png')",
+  position: "fixed",
+  top: 0,
+  left: 0,
+  width: "100%",
+  height: "100%",
+  opacity: 0.2, // Transparency
+  zIndex: -1,
+  backgroundSize: 'cover'
+}}>
+</div>
+
         <section className="section section-grid">
           <div>
             <h2>למה אנחנו צריכות מקווה חדש?</h2>
@@ -218,6 +232,7 @@ export default function HomePage() {
             <a href="mailto:aiach.leah@gmail.com">  mikvegm@gmail.com</a>
           </p>
         </section>
+
       </main>
     </>
   );
