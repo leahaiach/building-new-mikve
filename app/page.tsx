@@ -85,7 +85,7 @@ export default function HomePage() {
               <span className="hero-count-label">חתימות עד עכשיו</span>
             </div>
             <a href="#signature-form" className="hero-cta">
-          מצטרפות 
+          מצטרפת 
             </a>
           </div>
         </div>
